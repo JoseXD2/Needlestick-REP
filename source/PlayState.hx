@@ -1018,8 +1018,7 @@ class PlayState extends MusicBeatState
 				}
 		}
 		#end
-		noteTypeMap.clear();
-		noteTypeMap = null;
+		
 		eventPushedMap.clear();
 		eventPushedMap = null;	
 		// SONG SPECIFIC SCRIPTS
