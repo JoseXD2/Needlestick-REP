@@ -960,6 +960,11 @@ class PlayState extends MusicBeatState
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
 
+		var creditTxt = new FlxText(876, 648, 348);
+     creditTxt.text = "PORTED BY\nFNF BR";
+    creditTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+    creditTxt.scrollFactor.set();
+    add(creditTxt);				
 		switch(songName)
 		{
 			case 'toykeeper':
@@ -996,6 +1001,9 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+		if(ClientPrefs.downScroll) {
+			creditTxt.y = 148;
+		}			
 		curse.cameras = [camHUD];
 		fx.cameras = [camHUD];
 		vignette.cameras = [camHUD];
@@ -1010,6 +1018,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
+		creditTxt.cameras = [camHUD];			
 		scoreTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
@@ -1032,6 +1041,11 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(missMechText, {alpha: 0}, 15, {ease: FlxEase.quintOut});
 		}
 
+		#if android
+                addAndroidControls();
+	androidControls.visible = true;
+                #end
+			
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -1835,7 +1849,7 @@ class PlayState extends MusicBeatState
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
-		#if MODS_ALLOWED
+		#if windows 
 		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
 		#else
 		if (OpenFlAssets.exists(file)) {
@@ -2264,7 +2278,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE && #if android || FlxG.android.justReleased.BACK #end startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnLuas('onPause', [], false);
 			if(ret != FunkinLua.Function_Stop) {
