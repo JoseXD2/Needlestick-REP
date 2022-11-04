@@ -998,7 +998,7 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-			#if !android
+			#if LUA_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
 			var luaToLoad:String = 'custom_notetypes/' + notetype + '.lua';
