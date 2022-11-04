@@ -618,13 +618,13 @@ class PlayState extends MusicBeatState
 
 		for (folder in foldersToCheck)
 		{
-			if(FileSystem.exists(folder))
+			if(Assets.exists(folder))
 			{
-				for (file in FileSystem.readDirectory(folder))
+				for (file in list.filter(text -> text.contains(folder))
 				{
 					if(file.endsWith('.lua') && !filesPushed.contains(file))
 					{
-						luaArray.push(new FunkinLua(folder + file));
+						luaArray.push(new FunkinLua(Asset2File.getPath(folder + file)));
 						filesPushed.push(file);
 					}
 				}
