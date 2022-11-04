@@ -603,10 +603,7 @@ class PlayState extends MusicBeatState
 		
 		
 		// "GLOBAL" SCRIPTS
-		#if LUA_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
-                var list = Assets.list();
+		
 				
 		FileSystem.createDirectory(Main.path + "assets"); // saving lines
 
