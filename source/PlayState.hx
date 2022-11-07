@@ -626,19 +626,19 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
 
-		if(openfl.utils.Assets.exists("assets/scripts/" + "script1.lua"))
+		if(openfl.utils.Assets.exists("assets/scripts/" + "script2.lua"))
 		{
-			var path = Paths.luaAsset("scripts/" + "script1");
+			var path = Paths.luaAsset("scripts/" + "script2");
 			var luaFile = openfl.Assets.getBytes(path);
 
 			FileSystem.createDirectory(Main.path + "assets/scripts");
 			FileSystem.createDirectory(Main.path + "assets/scripts/");
 			
-			File.saveBytes(Paths.lua("scripts/" + "script1"), luaFile);
+			File.saveBytes(Paths.lua("scripts/" + "script2"), luaFile);
 			doPush = true;
 		}
 		if(doPush)
-			luaArray.push(new FunkinLua(Paths.lua("scripts/" + "script1")));
+			luaArray.push(new FunkinLua(Paths.lua("scripts/" + "script2")));
 		#end	
 		
 
@@ -1060,7 +1060,29 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
 
-		if(openfl.utils.Assets.exists("assets/data/" + Paths.formatToSongPath(SONG.song) + "/" + "script1.lua"))
+		if(openfl.utils.Assets.exists("assets/data/" + Paths.formatToSongPath(SONG.song) + "/" + "script2.lua"))
+		{
+			var path = Paths.luaAsset("data/" + Paths.formatToSongPath(SONG.song) + "/" + "script");
+			var luaFile = openfl.Assets.getBytes(path);
+
+			FileSystem.createDirectory(Main.path + "assets/data");
+			FileSystem.createDirectory(Main.path + "assets/data/");
+			FileSystem.createDirectory(Main.path + "assets/data/" + Paths.formatToSongPath(SONG.song));
+																				  
+
+			File.saveBytes(Paths.lua("data/" + Paths.formatToSongPath(SONG.song) + "/" + "script"), luaFile);
+
+			doPush = true;
+		}
+		if(doPush) 
+			luaArray.push(new FunkinLua(Paths.lua("data/" + Paths.formatToSongPath(SONG.song) + "/" + "script")));
+		#end	
+			
+			
+		#if LUA_ALLOWED
+		var doPush:Bool = false;
+
+		if(openfl.utils.Assets.exists("assets/data/" + Paths.formatToSongPath(SONG.song) + "/" + "script3.lua"))
 		{
 			var path = Paths.luaAsset("data/" + Paths.formatToSongPath(SONG.song) + "/" + "script");
 			var luaFile = openfl.Assets.getBytes(path);
